@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hiruy Recipe Platform</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="index.html">Add recipe.html</a>
+      </nav>
+    </header>
+    <main>
+      <h2>Add a New Recipe</h2>
+      <form>
+        <label for="recipe-name">Recipe Name</label>
+        <input type="text" name="recipe-name" id="recipe-name" />
+        <label for="category">Category</label>
+        <select id="category">
+          <option>Breakfast</option>
+          <option>Launch</option>
+          <option>Dinner</option>
+          <option>Dessert</option>
+          <option>snack</option>
+        </select>
+        <label for="ingredients">Ingredients</label>
+        <textarea id="ingredients" name="ingredients"></textarea>
+        <label for="steps">Preparation Steps</label>
+        <textarea id="steps" name="steps"></textarea>
+        <label for="servings">Servings</label>
+        <input type="number" name="servings" id="servings" />
+        <button type="submit">Send feed back</button>
+      </form>
+    </main>
+    <footer></footer>
+  </body>
+  <script src="js/script.js"></script>
+</html>
