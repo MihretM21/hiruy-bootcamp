@@ -6,7 +6,7 @@ const recipes = [
     time: "30 minutes",
     ingredients: ["2 carrots(sliced)", "1 onion(diced)", "2 potatoes(cubed)"],
     steps: [
-      "Heatoil inapot.",
+      "Heat oil in a pot.",
       "Add vegetables and broth.",
       "Simmer 20 minutes.",
     ],
@@ -17,7 +17,7 @@ const recipes = [
     category: "Lunch",
     servings: 2,
     time: "20 minutes",
-    ingredients: ["2chicken breasts", "2 burger buns", "1 tomato(sliced)"],
+    ingredients: ["2 chicken breasts", "2 burger buns", "1 tomato(sliced)"],
     steps: [
       "Season and grill the chicken.",
       "Toast the buns.",
@@ -31,7 +31,7 @@ const recipes = [
     servings: 6,
     time: "90 minutes",
     ingredients: [
-      "1whole chicken",
+      "1 whole chicken",
       "3 onions(chopped)",
       "4 tbsp berbere spice",
     ],
