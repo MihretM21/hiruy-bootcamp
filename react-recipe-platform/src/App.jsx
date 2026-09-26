@@ -1,7 +1,6 @@
 import Header from "./Header";
 import RecipeCard from "./RecipeCard";
 import Footer from "./Footer";
-import "./style.css";
 import ServingsCounter from "./ServingsCounter";
 
 const recipes = [
@@ -30,21 +29,23 @@ const recipes = [
 
 function App() {
   return (
-    <div>
+    <div className="min-h-screen bg-slate-50">
       <Header />
-      <main className="recipe-grid">
-        <h2>Recipes</h2>
+      <main className="max-w-6xl mx-auto px-6 py-8">
+        <h2 className="text-2xl font-bold text-slate-900 mb-4">Recipes</h2>
         <ServingsCounter initialServings={4} />
 
-        {recipes.map((recipe, index) => (
-          <RecipeCard
-            key={index}
-            name={recipe.name}
-            description={recipe.description}
-            image={recipe.image}
-            alt={recipe.alt}
-          />
-        ))}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {recipes.map((recipe, index) => (
+            <RecipeCard
+              key={index}
+              name={recipe.name}
+              description={recipe.description}
+              image={recipe.image}
+              alt={recipe.alt}
+            />
+          ))}
+        </div>
       </main>
       <Footer />
     </div>
