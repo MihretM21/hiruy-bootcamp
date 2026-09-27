@@ -1,70 +1,53 @@
-import { useParams, Link } from "react-router";
-import ServingsCounter from "./ServingsCounter";
-
-function RecipeDetail({ recipes }) {
-  const { id } = useParams();
-  // Finds recipe matching string id (e.g. "vegetable-soup", "doro-wat")
-  const recipe = recipes.find((r) => r.id === id);
-
-  if (!recipe) {
-    return (
-      <div className="max-w-2xl mx-auto p-8 text-center">
-        <h2 className="text-2xl font-bold text-slate-900 mb-4">Recipe Not Found</h2>
-        <Link to="/" className="text-slate-700 font-semibold underline">
-          ← Back to all recipes
-        </Link>
-      </div>
-    );
-  }
-
+function RecipeDetail({ recipe, onBack }) {
   return (
-    <article className="max-w-2xl mx-auto bg-white border border-slate-200 rounded-2xl shadow-md p-6 my-6">
-      <Link to="/" className="inline-block mb-4 text-slate-600 font-semibold hover:text-slate-900">
+    <div className="bg-white rounded-xl shadow-md p-6">
+      <button
+        onClick={onBack}
+        className="text-slate-600 hover:text-slate-900 mb-4 font-semibold"
+      >
         ← Back to Recipes
-      </Link>
+      </button>
 
-      <img
-        src={recipe.image}
-        alt={recipe.alt}
-        className="w-full h-64 object-cover rounded-xl mb-4"
-      />
+      <img src={recipe.image} alt={recipe.alt} className="w-full h-64 object-cover rounded-lg mb-6" />
 
-      <div className="flex justify-between items-center mb-2">
-        <h2 className="text-3xl font-bold text-slate-900">{recipe.name}</h2>
-        <span className="text-sm font-semibold bg-slate-100 text-slate-700 px-3 py-1 rounded-full">
-          {recipe.time}
-        </span>
-      </div>
-
+      <h2 className="text-2xl font-bold text-slate-900 mb-2">{recipe.name}</h2>
       <p className="text-slate-600 mb-6">{recipe.description}</p>
 
-      {/* Interactive Servings Counter */}
-      <div className="my-4 p-4 bg-slate-50 border border-slate-200 rounded-xl">
-        <ServingsCounter initialServings={recipe.servings || 4} />
-      </div>
-
-      {recipe.ingredients && (
-        <div className="mt-6">
-          <h3 className="text-xl font-bold text-slate-900 mb-3">Ingredients</h3>
-          <ul className="list-disc pl-6 text-slate-700 space-y-1">
-            {recipe.ingredients.map((ing, idx) => (
-              <li key={idx}>{ing}</li>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        <div>
+          <h3 className="text-lg font-bold text-slate-900 mb-2">Ingredients</h3>
+          <ul className="list-disc list-inside text-slate-700 space-y-1">
+            {recipe.ingredients.map((ingredient, index) => (
+              <li key={index}>{ingredient}</li>
             ))}
           </ul>
         </div>
-      )}
 
-      {recipe.steps && (
-        <div className="mt-6">
-          <h3 className="text-xl font-bold text-slate-900 mb-3">Cooking Steps</h3>
-          <ol className="list-decimal pl-6 text-slate-700 space-y-2">
-            {recipe.steps.map((step, idx) => (
-              <li key={idx}>{step}</li>
+        <div>
+          <h3 className="text-lg font-bold text-slate-900 mb-2">Preparation Steps</h3>
+          <ol className="list-decimal list-inside text-slate-700 space-y-1">
+            {recipe.steps.map((step, index) => (
+              <li key={index}>{step}</li>
             ))}
           </ol>
         </div>
-      )}
-    </article>
+      </div>
+
+      <table className="mt-6 border-collapse">
+        <tbody>
+          <tr>
+            <th className="text-left text-slate-900 pr-6 py-1">Category</th>
+            <th className="text-left text-slate-900 pr-6 py-1">Servings</th>
+            <th className="text-left text-slate-900 py-1">Prep Time</th>
+          </tr>
+          <tr>
+            <td className="pr-6 py-1 text-slate-700">{recipe.category}</td>
+            <td className="pr-6 py-1 text-slate-700">{recipe.servings}</td>
+            <td className="py-1 text-slate-700">{recipe.time}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   );
 }
 
