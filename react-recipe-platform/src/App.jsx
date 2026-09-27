@@ -1,52 +1,63 @@
+import { useState } from "react";
+import { Routes, Route } from "react-router";
 import Header from "./Header";
-import RecipeCard from "./RecipeCard";
 import Footer from "./Footer";
-import ServingsCounter from "./ServingsCounter";
-
-const recipes = [
-  {
-    name: "Vegetable Soup",
-    description:
-      "It is a flavorful broth made by simmering a mix of variety fresh vegetables",
-    image: "/images/vegetable-soup.jpg",
-    alt: "A warm bowl of fresh vegetable soup garnished with herbs.",
-  },
-  {
-    name: "Grilled Chicken Sandwich",
-    description:
-      "It is a delicious food which consists of grilled chicken with different spices and vegetables packed in toasted bun.",
-    image: "/images/chicken-sandwich.jpg",
-    alt: "A freshly grilled chicken sandwich on a toasted bun.",
-  },
-  {
-    name: "Doro wet",
-    description:
-      "It is a popular Ethiopian chicken stew simmered with boiled eggs in a sauce of onions and berbere.",
-    image: "/images/doro-wat.jpg",
-    alt: "Traditional Ethiopian Doro Wat served with boiled eggs and injera.",
-  },
-];
+import RecipeCard from "./RecipeCard";
+import RecipeDetail from "./RecipeDetail";
+import AddRecipe from "./AddRecipe";
+import initialRecipes from "./recipes";
 
 function App() {
-  return (
-    <div className="min-h-screen bg-slate-50">
-      <Header />
-      <main className="max-w-6xl mx-auto px-6 py-8">
-        <h2 className="text-2xl font-bold text-slate-900 mb-4">Recipes</h2>
-        <ServingsCounter initialServings={4} />
+  const [recipes, setRecipes] = useState(initialRecipes);
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {recipes.map((recipe, index) => (
-            <RecipeCard
-              key={index}
-              name={recipe.name}
-              description={recipe.description}
-              image={recipe.image}
-              alt={recipe.alt}
+  function handleAddRecipe(newRecipe) {
+    setRecipes([newRecipe, ...recipes]);
+  }
+
+  return (
+    <div className="min-h-screen flex flex-col justify-between bg-slate-50">
+      <div>
+        <Header />
+
+        <main className="max-w-6xl mx-auto px-6 py-8">
+          <Routes>
+            {/* 1. Home / All Recipes Route */}
+            <Route
+              path="/"
+              element={
+                <div>
+                  <h2 className="text-2xl font-bold text-slate-900 mb-6">Recipes</h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    {recipes.map((recipe) => (
+                      <RecipeCard
+                        key={recipe.id}
+                        id={recipe.id}
+                        name={recipe.name}
+                        description={recipe.description}
+                        image={recipe.image}
+                        alt={recipe.alt}
+                      />
+                    ))}
+                  </div>
+                </div>
+              }
             />
-          ))}
-        </div>
-      </main>
+
+            {/* 2. Recipe Detail Route */}
+            <Route
+              path="/recipe/:id"
+              element={<RecipeDetail recipes={recipes} />}
+            />
+
+            {/* 3. Add Recipe Form Route */}
+            <Route
+              path="/add-recipe"
+              element={<AddRecipe onAddRecipe={handleAddRecipe} />}
+            />
+          </Routes>
+        </main>
+      </div>
+
       <Footer />
     </div>
   );
