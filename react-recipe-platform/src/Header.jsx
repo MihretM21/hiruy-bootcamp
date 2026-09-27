@@ -1,24 +1,15 @@
-import { Link } from "react-router";
-
-function Header() {
+function Header({ onHomeClick, onAddRecipeClick }) {
   return (
-    <header className="bg-slate-900 text-white shadow-md">
-      <div className="max-w-4xl mx-auto p-4 flex justify-between items-center">
-        <Link to="/" className="text-xl font-bold tracking-wide hover:opacity-90">
-          🍲 Hiruy Recipe Platform
-        </Link>
-        <nav className="flex gap-4 items-center">
-          <Link to="/" className="text-slate-200 hover:text-white font-medium text-sm">
-            Recipes
-          </Link>
-          <Link
-            to="/add-recipe"
-            className="bg-white text-slate-900 px-3 py-1.5 rounded-lg font-bold hover:bg-slate-100 transition text-sm shadow-sm"
-          >
-            + Add Recipe
-          </Link>
-        </nav>
-      </div>
+    <header className="flex items-center justify-between px-6 py-4 bg-white shadow-sm">
+      <h1 className="text-xl font-bold text-slate-900">Hiruy Recipe Platform</h1>
+      <nav className="flex gap-6">
+        <button onClick={onHomeClick} className="text-slate-600 hover:text-slate-900 transition-colors">
+          Home
+        </button>
+        <button onClick={onAddRecipeClick} className="text-slate-600 hover:text-slate-900 transition-colors">
+          Add Recipe
+        </button>
+      </nav>
     </header>
   );
 }
