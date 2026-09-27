@@ -21,11 +21,11 @@ function RecipeCard({ name, description, image, alt, onView }) {
         </button>
         <button
           onClick={toggleFavorite}
-          className={w-full py-2 rounded-lg font-semibold transition-colors ${
+          className={`w-full py-2 rounded-lg font-semibold transition-colors ${
             isFavorite
               ? "bg-slate-900 text-white hover:bg-slate-700"
               : "bg-slate-100 text-slate-700 hover:bg-slate-200"
-          }}
+          }`}
         >
           {isFavorite ? "❤️ Favorited" : "🤍 Add to Favorites"}
         </button>
