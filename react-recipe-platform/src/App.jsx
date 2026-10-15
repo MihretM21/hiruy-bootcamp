@@ -6,7 +6,7 @@ import AddRecipeForm from "./AddRecipeForm";
 import Footer from "./Footer";
 import ServingsCounter from "./ServingsCounter";
 
-const recipes = [
+const initialRecipes = [
   {
     name: "Vegetable Soup",
     category: "Dinner",
@@ -44,6 +44,7 @@ const recipes = [
 
 function App() {
   const [currentView, setCurrentView] = useState("home");
+  const [recipes, setRecipes] = useState(initialRecipes);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
 
   function openRecipe(recipe) {
@@ -59,6 +60,10 @@ function App() {
   function openAddRecipeForm() {
     setCurrentView("add");
   }
+  function addRecipe(newRecipe) {
+  setRecipes([...recipes, newRecipe]);
+  setCurrentView("home");
+   }
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -72,7 +77,7 @@ function App() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {recipes.map((recipe, index) => (
                 <RecipeCard
-                  key={index}
+                  key={recipe.name}
                   name={recipe.name}
                   description={recipe.description}
                   image={recipe.image}
@@ -88,7 +93,7 @@ function App() {
           <RecipeDetail recipe={selectedRecipe} onBack={goHome} />
         )}
 
-        {currentView === "add" && <AddRecipeForm onCancel={goHome} />}
+        {currentView === "add" && <AddRecipeForm onAdd={addRecipe} onCancel={goHome} />}
       </main>
 
       <Footer />
