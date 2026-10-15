@@ -1,18 +1,27 @@
 import { useState } from "react";
 
-function AddRecipeForm({ onCancel }) {
+function AddRecipeForm({ onAdd, onCancel }) {
   const [name, setName] = useState("");
   const [category, setCategory] = useState("Breakfast");
   const [ingredients, setIngredients] = useState("");
   const [steps, setSteps] = useState("");
   const [servings, setServings] = useState("");
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    console.log({ name, category, ingredients, steps, servings });
-    alert("Recipe submitted! (Check the console — saving to a real list is a future step.)");
-  }
-
+  
+function handleSubmit(event) {
+ event.preventDefault();
+ onAdd({
+   name,
+   category,
+   servings: Number(servings) || 1,
+   time: "Not set",
+   description: `A ${category.toLowerCase()} recipe.`,
+   image: "/images/vegetable-soup.jpg",
+   alt: name,
+   ingredients: ingredients.split("\n").filter(Boolean),
+   steps: steps.split("\n").filter(Boolean),
+ });
+   }
+  
   return (
     <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-md p-6 flex flex-col gap-4 max-w-xl">
       <h2 className="text-2xl font-bold text-slate-900">Add a New Recipe</h2>
@@ -20,7 +29,7 @@ function AddRecipeForm({ onCancel }) {
       <div>
         <label className="block font-semibold text-slate-700 mb-1">Recipe Name</label>
         <input
-          type="text"
+          type="text" required
           value={name}
           onChange={(e) => setName(e.target.value)}
           className="w-full border border-slate-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-pink-500 focus:outline-none"
