@@ -3,6 +3,15 @@
 Hi! I am Mihret Dula. This repository contains my daily practice and weekly projects for the Hiruy Full-Stack Bootcamp.
 
 ## What is in this repository
+## Recipe platform: how it grew
+
+| Stage | What I added | Where |
+|---|---|---|
+| 1 | HTML pages | `index.html`, `recipe.html`, `add-recipe.html` |
+| 2 | CSS | `css/` |
+| 3 | JavaScript | `js/` |
+| 4 | React | `react-recipe-platform/` |
+| 5 | Tailwind | `react-recipe-platform/` |
 
 | Folder or file | What it is |
 |---|---|
